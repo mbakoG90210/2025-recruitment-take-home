@@ -9,7 +9,7 @@ export default class HomeController {
     /**
      * Initializes the HomeController with the app object and sets up event listeners.
      *
-     * @param {Object} app The application object used in the controller.
+     * @param {object} app - The application object used in the controller.
      */
     constructor(app) {
         this.app = app;
@@ -40,7 +40,7 @@ export default class HomeController {
     /**
      * Handles the page initialization event and processes actions based on the page name.
      *
-     * @param {Event} e The page initialization event.
+     * @param {Event} e - The page initialization event.
      * @returns {Promise<void>} A promise that resolves when the page handling is complete.
      */
     async handlePageInit(e) {
@@ -54,7 +54,7 @@ export default class HomeController {
     /**
      * Handles click events on the page, triggering actions based on the clicked element.
      *
-     * @param {Event} e The click event.
+     * @param {Event} e - The click event.
      * @returns {Promise<void>} A promise that resolves when the click handling is complete.
      */
     async handleClickEvents(e) {

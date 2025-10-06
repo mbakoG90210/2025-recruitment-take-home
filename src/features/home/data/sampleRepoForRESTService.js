@@ -1,11 +1,11 @@
 /**
- * 
+ *
  */
 export default class V3BankDetailsRepository {
     /**
      *
      */
-    constructor() { }
+    constructor() {}
 
     /**
      * Returns the request URL of the API endpoint.
@@ -19,7 +19,7 @@ export default class V3BankDetailsRepository {
     /**
      * Prepares data to a payload format for the backend API.
      *
-     * @param {Object} data data (account)to be sent in the request.
+     * @param {object} data - data (account)to be sent in the request.
      * @returns {string} The formatted JSON payload.
      */
     dataToPayload(data) {
@@ -37,8 +37,8 @@ export default class V3BankDetailsRepository {
     /**
      * Converts the backend API response payload to the format the application expects.
      *
-     * @param {Object} payload - The API response payload.
-     * @returns {Object} The parsed details from the payload.
+     * @param {object} payload - The API response payload.
+     * @returns {object} The parsed details from the payload.
      */
     payloadToData(payload) {
         // might want to do more here this is the response from the API

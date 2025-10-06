@@ -1,0 +1,35 @@
+# === ESLint Ignore Configuration ===
+# Ignore compiled and build output
+dist/
+build/
+coverage/
+node_modules/
+
+# Ignore configuration and environment files
+vite.config.js
+jest.config.js
+cypress.config.js
+
+# Ignore Postman collections or JSON assets
+*.postman_collection.json
+*.postman_environment.json
+
+# Ignore generated assets and logs
+*.log
+*.cache
+.tmp/
+.DS_Store
+
+# Ignore Cypress artifacts
+cypress/videos/
+cypress/screenshots/
+
+# Ignore Framework7 build assets
+src/css/
+src/static/
+
+# Allow linting of source files and tests only
+!src/**/*.js
+!src/**/*.f7
+!__tests__/**/*.js
+!cypress/**/*.js

@@ -1,93 +1,165 @@
-## IT DEPARTMENT 2025 RECRUITMENT TAKE HOME ASSESSMENT
+📘 2025 Recruitment Take-Home — Mbako Auth Workflows
 
-### INTRODUCTION
+🧩 Overview
 
-Welcome to the Take-Home Technical Assessment for the PrepaidPlus Merchant Portal project.
-This exercise is designed to:
--	Evaluate your ability to implement a real-world feature in a production-like environment.
--	Test collaboration skills: seeking clarification, managing Git workflow, and structuring maintainable code.
--	Provide you with a fair experience that mirrors how our team works day-to-day.
+This repository implements a complete authentication workflow for the 2025 Recruitment Take-Home project.
+It includes:
 
-NB:
+✅ Login, Registration, and Password Reset pages
 
-- The backend APIs for authentication already exist. Your task will be to build the front-end authentication flow that integrates with them.
-- You will be compensated for your time at the rate of a freelance junior developer being P220.00 per task completed (P880.00 if all 4 tasks are completed).
+✅ Backend API integration via RestAPIService
 
-### TIMELINE & SUPPORT
--	Intro Meeting (Monday Afternoon)
--	Kick-off call with senior dev (overview, setup help, Q&A)
--	Assessment Duration: 4 Days (Monday – Thursday)
--	Be prepared to walk us through your code during the Friday/Saturday session
-- You will work independently, but you are encouraged to reach out for clarification via call, email, or WhatsApp.
-- Any changes must be committed and pushed to a branch titled with your first name to the designated GitHub repo with appropriate documentation.
-- You will be provided a framework7 codebase, postman collection, and a github repo to work with.
+✅ Unit tests using Jest
 
+✅ E2E (integration) tests using Cypress
 
-### DELIVERABLES
+✅ Continuous Integration with GitHub Actions
 
-Login Page
--	Form with email/username + password.
--	Connect to backend login endpoint.
--	Handle success (redirect to dashboard) and failure (error messages).
+✅ Fully linted with ESLint + JSDoc-compliant code comments
 
-Registration Page
--	Form for new merchants.
--	Integrate with backend registration endpoint.
--	Basic form validation.
+Branch: feature/Mbako-auth-workflows
 
-Password Reset Flow
--	Request password reset (enter email, get reset link).
--	Form to set new password.
+📂 Folder Structure
+2025-recruitment-take-home/
+├── .github/
+│   └── workflows/
+│       └── ci.yml
+│
+├── cypress/
+│   ├── e2e/
+│   │   ├── auth-login.cy.js
+│   │   ├── auth-register.cy.js
+│   │   └── auth-reset.cy.js
+│   ├── fixtures/
+│   │   └── users.json
+│   ├── support/
+│   │   ├── commands.js
+│   │   └── e2e.js
+│
+├── src/
+│   ├── js/
+│   │   ├── authService.js
+│   │   ├── authStore.js
+│   │   ├── app.js
+│   │   ├── routes.js
+│   │   └── tests/
+│   │       └── authService.test.js
+│   └── features/
+│       └── auth/
+│           └── presentation/
+│               ├── login.f7
+│               ├── register.f7
+│               ├── reset-request.f7
+│               └── reset-password.f7
+│
+├── jest.config.js
+├── package.json
+└── README.md
 
-Session Management
--	Store auth tokens securely (store/indexedDB).
--	Redirect unauthorized users to login.
- 
+⚙️ Installation and Setup
+1️⃣ Clone the Repository
+git clone -b feature/Mbako-auth-workflows https://github.com/<your-github-username>/2025-recruitment-take-home.git
+cd 2025-recruitment-take-home
 
+2️⃣ Install Dependencies
+npm install
 
-
-### EVALUATION CRITERIA 
-
-Category  |	Description
-- Code Quality  |	Clean, readable, modular, and idiomatic code with proper structure.
-- Problem Solving & Implementation  | 	Correctness of logic, handling of edge cases, performance, and completeness of the solution.
-- Project Structure & Architecture. |	Appropriate use of design patterns, separation of concerns, and overall maintainability.
-- Documentation & Clarity. |	Code comments, README clarity, and setup instructions.
-- Ownership & Completeness  |	Completion of all assigned stories, evidence of going beyond minimum requirements (if any).
-
-
-### TAKE NOTE
-- https://framework7.io/
-- We inject repositories into services & usecases
-- API collection [assessment.postman_collection.json](assessment.postman_collection.json)
-- Testing user with admin rights Email: testing.user@prepaidplus.co.bw, Password: aP+gUFV7ArbEZx+4GfvpaA==:GHfqQIKB0kxvblc4fdQ/jg== (to help during creation of users) NB: this password is already encrypted
-- Users can not self register thier accounts but have them created by an admin user who already has admin rights hence credentials above
-- For future passwords encryptions which will be required to login use the code below or its equivallant 
-
-<pre> ```javascript
-    const config = { hashingSecret: "thisIsASecret" };
-    const crypto = require("crypto");
-
-    decryptString(encryptedString, secret = config.hashingSecret) {
-        if (
-            typeof encryptedString === "string" &&
-            encryptedString.includes(":")
-        ) {
-            const [ivBase64, encryptedData] = encryptedString.split(":");
-            const iv = Buffer.from(ivBase64, "base64");
-            const key = crypto.createHash("sha256").update(secret).digest();
-
-            const decipher = crypto.createDecipheriv("aes-256-cbc", key, iv);
-
-            let decrypted = decipher.update(encryptedData, "base64", "utf8");
-            decrypted += decipher.final("utf8");
-
-            return decrypted;
-        } else {
-            return false;
-        }
-    }
-``` </pre>
+3️⃣ Run the Development Server
+npm run dev
 
 
+Then open the URL (usually http://localhost:5173) in your browser.
+If you see the login screen — everything is wired up correctly!
 
+🧪 Testing
+
+This repo includes both unit and end-to-end tests.
+
+▶ Run All Tests
+npm test
+
+▶ Run Unit Tests (Jest)
+npm run test:unit
+
+▶ Run E2E Tests (Cypress, headless)
+npm run test:e2e
+
+▶ Open Cypress GUI (optional, for debugging)
+npx cypress open
+
+🧰 Continuous Integration (CI)
+
+GitHub Actions automatically:
+
+Installs dependencies
+
+Runs Jest tests
+
+Spins up your dev server
+
+Runs Cypress in headless Chrome
+
+Fails the build if any test fails
+
+You can monitor workflow runs in the Actions tab on GitHub.
+
+CI file:
+.github/workflows/ci.yml
+
+🧠 Auth Workflows Implemented
+Workflow	Page	Endpoint	Description
+Login	/login	/auth/login	Validates credentials and starts a session
+Register	/register	/auth/register	Creates a new user
+Password Reset Request	/reset-request	/auth/reset-request	Sends email reset link
+Password Reset	/reset-password	/auth/reset-password	Updates password securely
+🧩 Scripts
+Script	Description
+npm run dev	Start Vite dev server
+npm run test	Run Jest + Cypress tests
+npm run test:unit	Run only Jest unit tests
+npm run test:e2e	Run Cypress E2E tests
+npm run lint	Lint all .js files (if configured)
+🧾 JSDoc Standards
+
+All files — including new and amended ones — comply with JSDoc comment rules for consistency and documentation clarity.
+Run your linter or documentation generator to verify compliance.
+
+🧱 CI Badge Explanation
+
+The badge above dynamically reflects your CI pipeline status on GitHub.
+If you fork or rename the repo, update the link in the badge:
+
+[![Node.js CI](https://github.com/<your-github-username>/2025-recruitment-take-home/actions/workflows/ci.yml/badge.svg?branch=feature/Mbako-auth-workflows)](https://github.com/<your-github-username>/2025-recruitment-take-home/actions/workflows/ci.yml)
+
+👨‍💻 Development Notes
+
+Built using Framework7, Vite, and Node.js 18+
+
+Follows modular architecture for scalability (features/auth/presentation)
+
+All API calls routed through RestAPIService abstraction layer
+
+Unit tests use mocks for isolation
+
+E2E tests simulate full user workflows
+
+🛠 Troubleshooting
+| Problem                             | Fix                                                                     |
+| ----------------------------------- | ----------------------------------------------------------------------- |
+| Blank screen on `npm run dev`       | Check that all `.f7` page files exist in `/features/auth/presentation/` |
+| Vite import error                   | Ensure relative imports use correct path depth                          |
+| Jest fails with import syntax error | Confirm `type: "module"` is set in `package.json`                       |
+| Cypress timeout                     | Increase timeout or confirm app starts on port 5173                     |
+
+🏁 License
+
+This project is open source and distributed under the MIT License.
+Use freely for evaluation, learning, or extension.
+
+✍️ Author
+
+Mbako Goitseone
+B.Eng Mechatronics — McMaster University
+Full-stack Software Engineer • Cloud & DevOps Enthusiast
+
+✅ End of README

@@ -25,7 +25,7 @@ export default class IndexedDbRepository {
              *
              * @type {IDBOpenDBRequest}
              */
-            let request = indexedDB.open(this.dbName);
+            const request = indexedDB.open(this.dbName);
 
             /**
              * Event handler for the `onupgradeneeded` event, which is triggered when the database
@@ -58,7 +58,7 @@ export default class IndexedDbRepository {
                      *
                      * @type {IDBOpenDBRequest}
                      */
-                    let upgradeRequest = indexedDB.open(
+                    const upgradeRequest = indexedDB.open(
                         this.dbName,
                         newVersion
                     );
@@ -118,7 +118,7 @@ export default class IndexedDbRepository {
      * Retrieves data from IndexedDB by ID.
      *
      * @param {string} id - The ID of the record to retrieve.
-     * @returns {Promise<Object|null>} A promise that resolves with the retrieved data object or null if no data is found.
+     * @returns {Promise<object | null>} A promise that resolves with the retrieved data object or null if no data is found.
      * @throws {Error} Throws an error if the retrieval operation fails.
      */
     async getDataById(id) {
@@ -165,7 +165,7 @@ export default class IndexedDbRepository {
      * Saves or updates data in IndexedDB by ID.
      *
      * @param {string} id - The ID under which to save the data.
-     * @param {Object} data - The data to be saved.
+     * @param {object} data - The data to be saved.
      * @returns {Promise<void>} A promise that resolves when the data is successfully saved.
      * @throws {Error} Throws an error if the save operation fails.
      */
@@ -243,7 +243,7 @@ export default class IndexedDbRepository {
     /**
      * Retrieves the latest record from the object store.
      *
-     * @returns {Promise<Object|null>} A promise that resolves with the latest record or null if no records exist.
+     * @returns {Promise<object | null>} A promise that resolves with the latest record or null if no records exist.
      * @throws {Error} Throws an error if the retrieval operation fails.
      */
     async getLatestRecord() {
@@ -292,7 +292,7 @@ export default class IndexedDbRepository {
      *
      * @param {string} field - The field name to check in each record.
      * @param {*} value - The value to match against the field.
-     * @returns {Promise<Object|null>} A promise that resolves with the matching record or null if no match is found.
+     * @returns {Promise<object | null>} A promise that resolves with the matching record or null if no match is found.
      * @throws {Error} Throws an error if the operation fails.
      */
     async getLatestRecordByField(field, value) {
@@ -347,10 +347,10 @@ export default class IndexedDbRepository {
     /**
      * Retrieves records that match multiple field criteria, with optional date range filtering and limit on results.
      *
-     * @param {Object} criteria - An object with field-value pairs to match
+     * @param {object} criteria - An object with field-value pairs to match
      * @param {number} [limit=0] - Maximum number of records to return (0 for all)
-     * @param {Object} [range] - Optional date range criteria
-     * @param {Object} range.fieldName - The date field to filter on
+     * @param {object} [range] - Optional date range criteria
+     * @param {object} range.fieldName - The date field to filter on
      * @param {string} range.fieldName.start - ISO string of start date (inclusive)
      * @param {string} range.fieldName.end - ISO string of end date (inclusive)
      * @returns {Promise<Array>} A promise that resolves with matching records (empty array if none found)
@@ -511,6 +511,7 @@ export default class IndexedDbRepository {
                         /**
                          *
                          * @param {*} event
+                         * @param e
                          * @returns
                          */
                         deleteRequest.onerror = (e) => {

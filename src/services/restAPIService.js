@@ -7,7 +7,7 @@ export default class RestAPIService {
     /**
      * Initializes the RestAPIService with an endpoint repository.
      *
-     * @param {Object} endpointRepository The repository that provides
+     * @param {object} endpointRepository - The repository that provides
      * methods to format data and request URLs.
      */
     constructor(endpointRepository) {
@@ -22,8 +22,8 @@ export default class RestAPIService {
     /**
      * Makes a POST request to the API with the provided data.
      *
-     * @param {Object} data The data to be sent in the POST request.
-     * @returns {Promise<Object>} A promise that resolves with the
+     * @param {object} data - The data to be sent in the POST request.
+     * @returns {Promise<object>} A promise that resolves with the
      * response
      * data after it is processed by the endpoint repository.
      * @throws {Error} Throws an error if the request fails or the
@@ -76,7 +76,7 @@ export default class RestAPIService {
     /**
      * Makes a GET request to the API.
      *
-     * @returns {Promise<Object>} A promise that resolves with
+     * @returns {Promise<object>} A promise that resolves with
      * the response data after it is processed by the endpoint
      * repository.
      * @throws {Error} Throws an error if the request fails or
@@ -128,8 +128,8 @@ export default class RestAPIService {
      * Handles errors by generating a user-friendly message
      * based on the error and response.
      *
-     * @param {Error} error The error object.
-     * @param {Response} response The response object (if available).
+     * @param {Error} error - The error object.
+     * @param {Response} response - The response object (if available).
      * @returns {Promise<string>} A promise that resolves to a
      * user-friendly error message.
      */
