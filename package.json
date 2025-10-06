@@ -6,6 +6,9 @@
   "repository": "",
   "license": "UNLICENSED",
   "scripts": {
+    "test:unit": "jest --coverage",
+    "test:e2e": "cypress run",
+    "test": "npm run test:unit && npm run test:e2e",
     "format": "prettier --write src",
     "format:check": "prettier --check src",
     "lint": "eslint src",
