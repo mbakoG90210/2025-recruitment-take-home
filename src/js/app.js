@@ -52,6 +52,8 @@ app.on("routeChangeStart", async (routeTo, routeFrom, router) => {
 // Added a helper to include token on fetch calls
 /**
  *
+ * @param url
+ * @param options
  */
 window.authFetch = async (url, options = {}) => {
     const token = await AuthStore.getToken();
@@ -62,7 +64,7 @@ window.authFetch = async (url, options = {}) => {
 /**
  * Initializes the app by setting up the necessary controllers and services.
  *
- * @param {Object} app The application object used to initialize components.
+ * @param {object} app - The application object used to initialize components.
  */
 app.on("init", function () {
     new HomeController(app); //start here
@@ -304,7 +306,7 @@ app.on("init", function () {
     // Wait for the page to load before trying to render the chart
     /**
      * Initializes charts when the "home" page is loaded.
-     * @param {Object} page - The page object from Framework7.
+     * @param {object} page - The page object from Framework7.
      */
     app.on("pageInit", function (page) {
         if (page.name === "home") {

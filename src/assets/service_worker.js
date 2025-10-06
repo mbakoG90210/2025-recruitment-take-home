@@ -18,8 +18,8 @@ const assets = [
 /**
  * limit cache contents size
  *
- * @param {*} name name of cache object
- * @param {*} size size to limit object contents
+ * @param {*} name - name of cache object
+ * @param {*} size - size to limit object contents
  */
 const limitCacheSize = (name, size) => {
     caches.open(name).then((cache) => {

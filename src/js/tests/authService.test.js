@@ -17,6 +17,7 @@ describe("AuthService", () => {
     const encryptedSecret = "U2FsdGVkX19MbWFuZ29GUEBASGVsbG8xMjM=";
 
     /**
+     * @param str
      * @function decrypt
      * @description Sample decryption function for mock test data.
      */

@@ -4,17 +4,13 @@
  */
 
 export default {
-  testEnvironment: "node",
-  transform: {},
-  verbose: true,
-  collectCoverage: true,
-  collectCoverageFrom: [
-    "src/**/*.js",
-    "!src/**/tests/**",
-    "!src/**/*.f7",
-  ],
-  moduleFileExtensions: ["js", "json"],
-  roots: ["<rootDir>/src/js/tests"],
-  coverageDirectory: "coverage",
-  coverageReporters: ["text", "lcov"],
+    testEnvironment: "node",
+    transform: {},
+    verbose: true,
+    collectCoverage: true,
+    collectCoverageFrom: ["src/**/*.js", "!src/**/tests/**", "!src/**/*.f7"],
+    moduleFileExtensions: ["js", "json"],
+    roots: ["<rootDir>/src/js/tests"],
+    coverageDirectory: "coverage",
+    coverageReporters: ["text", "lcov"],
 };

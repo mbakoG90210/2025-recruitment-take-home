@@ -7,6 +7,7 @@ import store from "../js/store";
 export default class LoggingService {
     /**
      * Initializes the LoggingService by setting up the REST service with the GCP Log Explorer repository.
+     * @param loggingRepository
      */
     constructor(loggingRepository) {
         // Initialize REST service for logging
@@ -16,9 +17,11 @@ export default class LoggingService {
     /**
      * Logs an error and displays an alert to the user with the error message.
      *
-     * @param {Object} app The app object used for showing the alert dialog.
-     * @param {Error} e The error object that contains the error details.
-     * @param {string} trail Additional information or context to append to the error message.
+     * @param {object} app - The app object used for showing the alert dialog.
+     * @param {Error} e - The error object that contains the error details.
+     * @param {string} trail - Additional information or context to append to the error message.
+     * @param moreInfo
+     * @param title
      */
     logAndShowError(app, e, trail, moreInfo = null, title = "Ooops") {
         // Send a request to the GCP endpoint and display an alert with the error message
@@ -56,9 +59,9 @@ export default class LoggingService {
     /**
      * Displays an alert dialog with the error message.
      *
-     * @param {Object} app The app object used for showing the alert dialog.
-     * @param {Error} e The error object that contains the error details.
-     * @param {string} trail Additional information or context to append to the error message.
+     * @param {object} app - The app object used for showing the alert dialog.
+     * @param {Error} e - The error object that contains the error details.
+     * @param {string} trail - Additional information or context to append to the error message.
      */
     showError(app, e, trail) {
         app.dialog
@@ -85,6 +88,8 @@ export default class LoggingService {
 
     /**
      * Logs an error to the logging service. Placeholder for future error logging functionality.
+     * @param e
+     * @param moreInfo
      */
     logError(e, moreInfo = null) {
         //something is about to happen
@@ -100,6 +105,8 @@ export default class LoggingService {
 
     /**
      * Logs user activity to the logging service. Placeholder for future activity logging functionality.
+     * @param title
+     * @param moreInfo
      */
     logActivity(title, moreInfo = null) {
         const data = {

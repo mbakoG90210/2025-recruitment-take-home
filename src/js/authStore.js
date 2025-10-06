@@ -12,13 +12,25 @@
 function openDB() {
     return new Promise((resolve, reject) => {
         const r = indexedDB.open("prepaidplus-auth", 1);
+        /**
+         *
+         * @param e
+         */
         r.onupgradeneeded = (e) => {
             const db = e.target.result;
             if (!db.objectStoreNames.contains("auth")) {
                 db.createObjectStore("auth");
             }
         };
+        /**
+         *
+         * @param e
+         */
         r.onsuccess = (e) => resolve(e.target.result);
+        /**
+         *
+         * @param e
+         */
         r.onerror = (e) => reject(e.target.error);
     });
 }
@@ -36,7 +48,14 @@ async function put(key, val) {
         const tx = db.transaction("auth", "readwrite");
         const store = tx.objectStore("auth");
         const req = store.put(val, key);
+        /**
+         *
+         */
         req.onsuccess = () => res(true);
+        /**
+         *
+         * @param e
+         */
         req.onerror = (e) => rej(e.target.error);
     });
 }
@@ -53,7 +72,14 @@ async function get(key) {
         const tx = db.transaction("auth", "readonly");
         const store = tx.objectStore("auth");
         const req = store.get(key);
+        /**
+         *
+         */
         req.onsuccess = () => res(req.result);
+        /**
+         *
+         * @param e
+         */
         req.onerror = (e) => rej(e.target.error);
     });
 }
@@ -70,7 +96,14 @@ async function remove(key) {
         const tx = db.transaction("auth", "readwrite");
         const store = tx.objectStore("auth");
         const req = store.delete(key);
+        /**
+         *
+         */
         req.onsuccess = () => res(true);
+        /**
+         *
+         * @param e
+         */
         req.onerror = (e) => rej(e.target.error);
     });
 }
@@ -78,7 +111,7 @@ async function remove(key) {
 const authStore = {
     /**
      * Save the auth token and user profile.
-     * @param {{token: string, user: Object}} param0
+     * @param {{token: string, user: object}} param0
      * @returns {Promise<void>}
      */
     async setAuth({ token, user }) {
@@ -92,7 +125,7 @@ const authStore = {
         return get("token");
     },
 
-    /** @returns {Promise<Object|undefined>} */
+    /** @returns {Promise<object | undefined>} */
     async getUser() {
         return get("user");
     },

@@ -4,19 +4,19 @@
  */
 
 describe("Login Workflow", () => {
-  beforeEach(() => {
-    cy.visit("/login");
-  });
+    beforeEach(() => {
+        cy.visit("/login");
+    });
 
-  it("should display login form", () => {
-    cy.get("form#login-form").should("exist");
-  });
+    it("should display login form", () => {
+        cy.get("form#login-form").should("exist");
+    });
 
-  it("should login successfully with valid credentials", () => {
-    cy.get('input[name="username"]').type("admin");
-    cy.get('input[name="password"]').type("password123");
-    cy.get('button[type="submit"]').click();
+    it("should login successfully with valid credentials", () => {
+        cy.get('input[name="username"]').type("admin");
+        cy.get('input[name="password"]').type("password123");
+        cy.get('button[type="submit"]').click();
 
-    cy.url().should("include", "/dashboard");
-  });
+        cy.url().should("include", "/dashboard");
+    });
 });

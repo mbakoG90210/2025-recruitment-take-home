@@ -33,7 +33,7 @@ function _initApi() {
 /**
  * HTTP POST helper using RestAPIService.
  * @param {string} path
- * @param {Object} payload
+ * @param {object} payload
  * @returns {Promise<any>}
  * @private
  */
@@ -62,10 +62,10 @@ async function _get(path) {
 const AuthService = {
     /**
      * Login with identifier (email or username) and password.
-     * @param {Object} credentials
+     * @param {object} credentials
      * @param {string} credentials.identifier
      * @param {string} credentials.password
-     * @returns {Promise<Object>}
+     * @returns {Promise<object>}
      */
     async login({ identifier, password }) {
         return _post("/auth/login", { identifier, password });
@@ -73,8 +73,8 @@ const AuthService = {
 
     /**
      * Register a new merchant.
-     * @param {Object} payload
-     * @returns {Promise<Object>}
+     * @param {object} payload
+     * @returns {Promise<object>}
      */
     async register(payload) {
         return _post("/auth/register", payload);
@@ -82,8 +82,8 @@ const AuthService = {
 
     /**
      * Request password reset link.
-     * @param {Object} payload
-     * @returns {Promise<Object>}
+     * @param {object} payload
+     * @returns {Promise<object>}
      */
     async requestPasswordReset(payload) {
         return _post("/auth/password-reset-request", payload);
@@ -91,8 +91,8 @@ const AuthService = {
 
     /**
      * Reset password using token.
-     * @param {Object} payload
-     * @returns {Promise<Object>}
+     * @param {object} payload
+     * @returns {Promise<object>}
      */
     async resetPassword(payload) {
         return _post("/auth/password-reset", payload);
@@ -100,7 +100,7 @@ const AuthService = {
 
     /**
      * Get authenticated user info.
-     * @returns {Promise<Object>}
+     * @returns {Promise<object>}
      */
     async me() {
         return _get("/auth/me");
