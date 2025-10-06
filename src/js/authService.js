@@ -1,60 +1,59 @@
-//wrapper to call backend auth endpoints using existing RestAPIService.
+/**
+ * Authentication service wrapping backend API calls using RestAPIService.
+ * @module AuthService
+ */
 
 import RestAPIService from "../services/restAPIService.js";
 
-export default class AuthService {
-    constructor(restApiService) {
-        this.rest = restApiService;
+// Instantiate once and reuse
+const api = new RestAPIService();
 
-        this.urls = {
-            login: `${"https://us-central1-portal-tps.cloudfunctions.net/"}auth/login`,
-            register: `${"https://us-central1-portal-tps.cloudfunctions.net/"}auth/register`,
-            requestReset: `${"https://us-central1-portal-tps.cloudfunctions.net/"}auth/password-reset-request`,
-            reset: `${"https://us-central1-portal-tps.cloudfunctions.net/"}auth/password-reset`,
-        };
-    }
+const AuthService = {
+    /**
+     * Login with email and password.
+     * @async
+     * @param {string} email - User email address.
+     * @param {string} password - User password (plaintext).
+     * @returns {Promise<Object>} Response with token and user data.
+     */
+    login: (email, password) => api.post("/auth/login", { email, password }),
 
-    async login(credentials) {
-        const res = await fetch(this.urls.login, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(credentials),
-        });
-        const payload = await res.json();
-        if (!res.ok) throw new Error(payload?.message || "Login failed");
-        return payload;
-    }
+    /**
+     * Register a new merchant account.
+     * @async
+     * @param {string} businessName - Merchant business name.
+     * @param {string} email - Email address.
+     * @param {string} password - Plaintext password.
+     * @returns {Promise<Object>} Backend response with created user info.
+     */
+    register: (businessName, email, password) =>
+        api.post("/auth/register", { businessName, email, password }),
 
-    async register(payload) {
-        const res = await fetch(this.urls.register, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(payload),
-        });
-        const data = await res.json();
-        if (!res.ok) throw new Error(data?.message || "Registration failed");
-        return data;
-    }
+    /**
+     * Request password reset link for a user.
+     * @async
+     * @param {string} email - Email of user requesting reset.
+     * @returns {Promise<Object>} Backend response (success message).
+     */
+    requestPasswordReset: (email) =>
+        api.post("/auth/password-reset-request", { email }),
 
-    async requestPasswordReset(payload) {
-        const res = await fetch(this.urls.requestReset, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(payload),
-        });
-        const data = await res.json();
-        if (!res.ok) throw new Error(data?.message || "Request failed");
-        return data;
-    }
+    /**
+     * Reset user password with provided token.
+     * @async
+     * @param {string} token - Reset token.
+     * @param {string} newPassword - New plaintext password.
+     * @returns {Promise<Object>} Backend response.
+     */
+    resetPassword: (token, newPassword) =>
+        api.post("/auth/password-reset", { token, newPassword }),
 
-    async resetPassword(payload) {
-        const res = await fetch(this.urls.reset, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(payload),
-        });
-        const data = await res.json();
-        if (!res.ok) throw new Error(data?.message || "Reset failed");
-        return data;
-    }
-}
+    /**
+     * Fetch authenticated user info.
+     * @async
+     * @returns {Promise<Object>} Authenticated user details.
+     */
+    me: () => api.get("/auth/me"),
+};
+
+export default AuthService;

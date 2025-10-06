@@ -8,7 +8,7 @@ import "framework7/css/bundle";
 import App from "../app.f7";
 import "../css/icons.css";
 import "../css/app.css";
-import AuthStore from "./js/authStore.js";
+import AuthStore from "./authStore.js";
 
 var app = new Framework7({
     name: "Prepaid+ Merchant Portal", // App name
@@ -50,6 +50,9 @@ app.on("routeChangeStart", async (routeTo, routeFrom, router) => {
 });
 
 // Added a helper to include token on fetch calls
+/**
+ *
+ */
 window.authFetch = async (url, options = {}) => {
     const token = await AuthStore.getToken();
     options.headers = options.headers || {};
